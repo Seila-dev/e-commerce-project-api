@@ -9,4 +9,5 @@ productsRoutes.delete("/:id", new ProductsController().destroy)
 productsRoutes.put("/:id", new ProductsController().update)
 
 
+
 export default productsRoutes
