@@ -26,14 +26,14 @@ export class ProductsController {
         try {
             const { name, price, description, image, highlight, color_id, size_id, category_id } = request.body;
 
-            const productAlreadyExists = await prisma.product.findFirst({
-                where: { name }
-            })
+            // const productAlreadyExists = await prisma.product.findFirst({
+            //     where: { name }
+            // })
 
-            if (productAlreadyExists) {
-                response.status(409).send({ message: "O produto já existe" });
-                return
-            }
+            // if (productAlreadyExists) {
+            //     response.status(409).send({ message: "O produto já existe" });
+            //     return
+            // }
 
             const product = await prisma.product.create({
                 data: {
@@ -52,12 +52,14 @@ export class ProductsController {
 
             response.status(200).json(product);
         } catch (error: any) {
-            if (error.code === 'P2002') { // Código de erro para violação de chave única
-                response.status(409).send({ message: "O produto com este nome já existe." });
-            } else {
-                console.error(error);
-                response.status(500).send({ message: "Erro ao criar o produto." });
-            }
+            console.log(error)
+            response.status(500).send({ message: "Erro ao criar o produto." })
+            // if (error.code === 'P2002') { // Código de erro para violação de chave única
+            //     response.status(409).send({ message: "O produto com este nome já existe." });
+            // } else {
+            //     console.error(error);
+            //     response.status(500).send({ message: "Erro ao criar o produto." });
+            // }
         }
     }
 

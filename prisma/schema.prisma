@@ -25,7 +25,7 @@ model Color {
 
 model Product {
   id          Int        @id @default(autoincrement())
-  name        String     @db.VarChar(100) @unique
+  name        String     @db.VarChar(100)
   image       String
   price       Decimal    @db.Decimal(10, 2)
   discount    Decimal?   @db.Decimal(5, 2)
