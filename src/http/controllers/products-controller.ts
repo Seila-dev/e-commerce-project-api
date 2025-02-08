@@ -24,16 +24,16 @@ export class ProductsController {
 
     async create(request: Request, response: Response) {
         try {
-            const { name, price, description, image, highlight, color_id, size_id, category_id } = request.body;
+            const { ean, name, price, description, image, highlight, colorId, sizeId, categoryId } = request.body;
 
-            // const productAlreadyExists = await prisma.product.findFirst({
-            //     where: { name }
-            // })
+            const productAlreadyExists = await prisma.product.findFirst({
+                where: { ean }
+            })
 
-            // if (productAlreadyExists) {
-            //     response.status(409).send({ message: "O produto já existe" });
-            //     return
-            // }
+            if (productAlreadyExists) {
+                response.status(409).send({ message: "O produto já existe" });
+                return
+            }
 
             const product = await prisma.product.create({
                 data: {
@@ -42,11 +42,10 @@ export class ProductsController {
                     description,
                     image,
                     highlight,
-                    created_at: new Date(),
-                    updated_at: new Date(),
-                    color_id,
-                    size_id,
-                    category_id
+                    colorId,
+                    sizeId,
+                    categoryId,
+                    ean
                 }
             });
 
@@ -64,7 +63,7 @@ export class ProductsController {
     }
 
     async update(request: Request, response: Response) {
-        const { name, price, description, image, highlight, color_id, size_id, category_id } = request.body;
+        const { name, price, description, image, highlight, colorId, sizeId, categoryId } = request.body;
         const { id } = request.params
 
         try {
@@ -78,11 +77,9 @@ export class ProductsController {
                     description,
                     image,
                     highlight,
-                    created_at: new Date(),
-                    updated_at: new Date(),
-                    color_id,
-                    size_id,
-                    category_id
+                    colorId,
+                    sizeId,
+                    categoryId
                 }
             })
 
