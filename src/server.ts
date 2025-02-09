@@ -3,6 +3,7 @@ import productsRoutes from "./routes/products-routes"
 import express from 'express'
 import uploadRoutes from "./routes/upload-routes"
 import path from 'path'
+import usersRoutes from "./routes/users-routes"
 
 const port = 3000
 
@@ -15,3 +16,4 @@ app.listen(port, () => {
 
 app.use('/products', productsRoutes)
 app.use('/upload', uploadRoutes)
+app.use('/users', usersRoutes)
