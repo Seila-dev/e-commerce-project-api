@@ -23,6 +23,11 @@ export class UploadController {
                     price,
                     highlight: Boolean(highlight),
                     ean
+                },
+                include: {
+                    categories: true,
+                    colors: true,
+                    sizes: true
                 }
             })
             response.status(201).json(product)

@@ -63,7 +63,7 @@ export class ProductsController {
     }
 
     async update(request: Request, response: Response) {
-        const { name, price, description, image, highlight, colorId, sizeId, categoryId } = request.body;
+        const { name, price, description, image, highlight, ean, colorId, sizeId, categoryId } = request.body;
         const { id } = request.params
 
         try {
@@ -79,7 +79,8 @@ export class ProductsController {
                     highlight,
                     colorId,
                     sizeId,
-                    categoryId
+                    categoryId,
+                    ean
                 }
             })
 

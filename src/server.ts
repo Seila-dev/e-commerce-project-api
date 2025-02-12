@@ -7,7 +7,7 @@ import usersRoutes from "./routes/users-routes"
 
 const port = 3000
 
-const publicPath = path.join(process.cwd(), 'uploads'); // usando process.cwd() ao invés de __dirname
+const publicPath = path.join(process.cwd(), 'uploads');
 app.use('/uploads', express.static(publicPath));
 
 app.listen(port, () => {
