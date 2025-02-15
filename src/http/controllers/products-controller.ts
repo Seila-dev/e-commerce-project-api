@@ -26,6 +26,14 @@ export class ProductsController {
         try {
             const { ean, name, price, description, image, highlight, colorId, sizeId, categoryId } = request.body;
 
+            const parsedPrice = Number(price);  // Convertendo para number
+            const parsedEan = Number(ean);      // Convertendo para number
+        
+            // Se `category`, `size` ou `color` forem IDs que devem ser números
+            const parsedCategory = Number(categoryId);
+            const parsedSize = Number(sizeId);
+            const parsedColor = Number(colorId);
+
             const productAlreadyExists = await prisma.product.findFirst({
                 where: { ean }
             })
@@ -38,7 +46,7 @@ export class ProductsController {
             const product = await prisma.product.create({
                 data: {
                     name,
-                    price,
+                    price: parsedPrice,
                     description,
                     image,
                     highlight,
