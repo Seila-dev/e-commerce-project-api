@@ -24,12 +24,13 @@ export class ProductsController {
 
     async create(request: Request, response: Response) {
         try {
-            const { ean, name, price, description, image, highlight, colorId, sizeId, categoryId } = request.body;
+            const { ean, name, price, description, image, highlight, colorId, sizeId, categoryId, discount, rating } = request.body;
 
-            const parsedPrice = Number(price);  // Convertendo para number
-            const parsedEan = Number(ean);      // Convertendo para number
+            const parsedPrice = Number(price);  
+            const parsedEan = Number(ean);
+            const parsedDiscount = Number(discount);
+            const parsedRating = Number(rating)   
         
-            // Se `category`, `size` ou `color` forem IDs que devem ser números
             const parsedCategory = Number(categoryId);
             const parsedSize = Number(sizeId);
             const parsedColor = Number(colorId);

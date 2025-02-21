@@ -11,7 +11,7 @@ export class UploadController {
         }
         try {
             const filePath = path.join(request.file.filename)
-            const { name, ean, price, description, highlight, categoryId, sizeId, colorId } = request.body
+            const { name, ean, price, description, highlight, categoryId, sizeId, colorId, rating, discount } = request.body
 
             const product = await prisma.product.create({
                 data: {
@@ -22,6 +22,8 @@ export class UploadController {
                     sizeId: parseInt(sizeId),
                     colorId: parseInt(colorId),
                     price,
+                    rating,
+                    discount,
                     highlight: Boolean(highlight),
                     ean
                 },
