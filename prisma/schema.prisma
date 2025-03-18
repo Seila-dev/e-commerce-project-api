@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("ECOMMERCE_DATABASE_URL")
 }
 
 model Category {
@@ -12,7 +12,7 @@ model Category {
   name     String
   products Product[]
 
-  @@map("categories")
+  @@map("ecommerce_categories")
 }
 
 model Color {
@@ -20,7 +20,7 @@ model Color {
   name     String
   products Product[]
 
-  @@map("colors")
+  @@map("ecommerce_colors")
 }
 
 model Product {
@@ -43,7 +43,7 @@ model Product {
   sizes       Size     @relation(fields: [sizeId], references: [id], map: "fk_size")
   stocks      Stock[]
 
-  @@map("products")
+  @@map("ecommerce_products")
 }
 
 model Size {
@@ -51,7 +51,7 @@ model Size {
   name     String
   products Product[]
 
-  @@map("sizes")
+  @@map("ecommerce_sizes")
 }
 
 model Stock {
@@ -65,17 +65,28 @@ model Stock {
   quantity      Int
   products      Product  @relation(fields: [productId], references: [id], map: "fk_products")
 
-  @@map("stocks")
+  @@map("ecommerce_stocks")
 }
 
 model User {
-  id           Int  @id @default(autoincrement())
-  email        String @unique
-  firstName    String @map("first_name")
-  lastName     String @map("last_name")
-  passwordHash String @map("password_hash")
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  firstName    String   @map("first_name")
+  lastName     String   @map("last_name")
+  passwordHash String   @map("password_hash")
   createdAt    DateTime @default(now()) @map("created_at")
   updatedAt    DateTime @updatedAt @map("updated_at")
 
-  @@map("users")
+  @@map("ecommerce_users")
+}
+
+model McdonaldUser {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  username     String
+  passwordHash String   @map("password_hash")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("mcdonald_users")
 }

@@ -27,13 +27,6 @@ export class ProductsController {
             const { ean, name, price, description, image, highlight, colorId, sizeId, categoryId, discount, rating } = request.body;
 
             const parsedPrice = Number(price);  
-            const parsedEan = Number(ean);
-            const parsedDiscount = Number(discount);
-            const parsedRating = Number(rating)   
-        
-            const parsedCategory = Number(categoryId);
-            const parsedSize = Number(sizeId);
-            const parsedColor = Number(colorId);
 
             const productAlreadyExists = await prisma.product.findFirst({
                 where: { ean }
