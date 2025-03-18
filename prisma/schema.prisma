@@ -68,7 +68,7 @@ model Stock {
   @@map("ecommerce_stocks")
 }
 
-model User {
+model EcommerceUser {
   id           Int      @id @default(autoincrement())
   email        String   @unique
   firstName    String   @map("first_name")

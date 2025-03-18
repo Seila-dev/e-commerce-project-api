@@ -9,7 +9,7 @@ export class UsersController {
         try {
             const { email, firstName, lastName, passwordHash } = request.body
 
-            const user = await prisma.user.findUnique({
+            const user = await prisma.ecommerceUser.findUnique({
                 where: {
                     email
                 }
@@ -22,7 +22,7 @@ export class UsersController {
 
             const hashedPassword = await bcrypt.hash(passwordHash, 10)
 
-            const newUser = await prisma.user.create({
+            const newUser = await prisma.ecommerceUser.create({
                 data: {
                     email,
                     firstName,
@@ -41,7 +41,7 @@ export class UsersController {
         const { email, passwordHash } = request.body
 
         try {
-            const user = await prisma.user.findUnique({
+            const user = await prisma.ecommerceUser.findUnique({
                 where: {
                     email
                 }
